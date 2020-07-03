@@ -1,0 +1,31 @@
+<nav class="header">
+  <div class="container">
+    <div class="logo">
+      <a routerLink="/" class="logo-link">EasyDonate</a>
+    </div>
+    <div class="header-right">
+      <a routerLink="/login" routerLinkActive="header-active-link" *ngIf="!isAuthenticated">Login</a>
+      <a routerLink="/signup" routerLinkActive="header-active-link" *ngIf="!isAuthenticated">Signup</a>
+      <a routerLink="/dashboard" routerLinkActive="header-active-link" *ngIf="isAuthenticated">Dashboard</a>
+      <a routerLink="/about" routerLinkActive="header-active-link">About</a>
+      <div class="header-avatar-section" *ngIf="isAuthenticated">
+        <span style = "color: #fff; padding: 0 10px;"> Hello, {{userData.fname}}!</span>
+        <a routerLink="/profile" routerLinkActive="header-active-link">
+          <img *ngIf = "userData" class="header-avatar" src="{{userData.avatar}}" />
+        </a>
+      </div>
+    </div>
+    <div class="hamburger">
+      <div class="hamburger-icon" (click)="toggleNav()">
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+    </div>
+  </div>
+</nav>
+<div class="hamburger-links" #ham>
+  <a routerLink="/login" routerLinkActive="header-active-link">Login</a>
+  <a routerLink="/signup" routerLinkActive="header-active-link">Signup</a>
+  <a routerLink="/about" routerLinkActive="header-active-link">About</a>
+</div>

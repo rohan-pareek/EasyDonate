@@ -1,0 +1,21 @@
+<div class="profile-wrapper" *ngIf="userData">
+  <div *ngIf="errorMessage" class="errorMessage">{{errorMessage}}</div>
+  <div *ngIf="successMessage" class="successMessage">{{successMessage}}</div>
+  <div class="profile-section">
+    <div class="profile-pic">
+      <img [src]="userData.avatar || avatarURL" (click)="avatar.click()" />
+      <form>
+        <input type="file" style="visibility: hidden;" (change)="avatarChange($event)" name="avatar" #avatar />
+      </form>
+    </div>
+    <div class="profile-details">
+      <div class="profile-name">{{userData.fname}} {{userData.lname}}</div>
+      <div class="profile-email">
+
+        <a href="mailto:{{userData.email}}">{{userData.email}}</a></div>
+      <div class="logout">
+        <a (click)="logout()">Logout</a>
+      </div>
+    </div>
+  </div>
+</div>

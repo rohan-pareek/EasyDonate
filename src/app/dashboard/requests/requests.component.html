@@ -1,0 +1,50 @@
+<div class="requests-wrapper">
+  <div class="requests-table">
+    <h3>Incoming requests</h3>
+    <table>
+        <tr>
+        <th>Item</th>
+        <th>Requested By</th>
+        <th>Requested On</th>
+        <th class="status-col">Status</th>
+        <th class="action-a-r">Action</th>
+      </tr>
+      <tr *ngFor = "let request of requests">
+        <td><a routerLink = "/donation/{{request.itemID}}">{{request.itemTitle}}</a></td>
+        <td>{{request.receptorEmail}}</td>
+        <td>{{request.requestedDate | date:'medium'}}</td>
+        <td>{{request.status}}</td>
+        <td class="action-buttons">
+          <!-- <span (click) = "updateRequest(request._id, 'A')">Approve</span>
+          <span (click) = "updateRequest(request._id, 'R')">Reject</span> -->
+          <button [disabled] = "request.status !== 'P - Pending'" (click) = "updateRequest(request._id, 'A')">Approve</button>
+          <button [disabled] = "request.status !== 'P - Pending'" (click) = "updateRequest(request._id, 'R')">Reject</button>
+        </td>
+      </tr>
+      <tr *ngIf = "requests.length === 0">
+        <td colspan="5">No records found</td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="requests-table">
+    <h3>Your requests</h3>
+    <table>
+        <tr>
+        <th>Item</th>
+        <th>Item Owner</th>
+        <th>Requested On</th>
+        <th>Status</th>
+      </tr>
+      <tr *ngFor = "let request of outgoingRequests">
+        <td><a routerLink = "/donation/{{request.itemID}}">{{request.itemTitle}}</a></td>
+        <td>{{request.ownerEmail}}</td>
+        <td>{{request.requestedDate | date:'medium'}}</td>
+        <td>{{request.status}}</td>
+      </tr>
+      <tr *ngIf = "outgoingRequests.length === 0">
+        <td colspan="4">No records found</td>
+      </tr>
+    </table>
+  </div>
+</div>

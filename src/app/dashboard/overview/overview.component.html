@@ -1,0 +1,16 @@
+<div class="donation-searchbox form-control">
+  <label>Search donations</label>
+  <input type="text" [(ngModel)] = "donationSearch" />
+</div>
+<div class="overview-wrapper">
+  
+  <div routerLink = "/donation/{{donation._id}}" *ngFor = "let donation of donations.data | donationFilter: donationSearch" class="donation-card">
+    <div class="donation-card-img">
+      <img src = "{{donation.thumbnail}}" />
+    </div>
+    <div class="donation-card-content">
+      <div class="donation-card-title">{{donation.title}}</div>
+      <div class="donation-card-owner">{{donation.owner}}</div>
+    </div>
+  </div>
+</div>

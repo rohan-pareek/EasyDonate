@@ -1,0 +1,26 @@
+<section class="dashboard-section">
+  <div class="dashboard-wrapper">
+    <div class="new-donation">
+      <button routerLink = "/donate" class="new-donation-button">New Donation</button>
+    </div>
+    <div class="dashboard-main" *ngIf = "donations.data">
+      <div class="recent-donations">
+        <h2>Recent donations</h2>
+        <div class="item" *ngFor = "let donation of donations.data" routerLink = "/donation/{{donation._id}}">
+          <div class="recent-donation-title">{{donation.title}}</div>
+          <div class="recent-donation-owner">{{donation.owner}}</div>
+        </div>
+      </div>
+      <div class="dashboard-pages">
+        <ul>
+          <li><a routerLink = "/dashboard/overview" routerLinkActive = "dashboard-pages-active-link">Overview</a></li>
+          <li><a routerLink = "/dashboard/donations" routerLinkActive = "dashboard-pages-active-link">Your donations</a></li>
+          <li><a routerLink = "/dashboard/requests" routerLinkActive = "dashboard-pages-active-link">Donation requests</a></li>
+        </ul>
+        <div class="dashboard-outlet">
+          <router-outlet></router-outlet>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

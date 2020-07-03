@@ -1,0 +1,62 @@
+<section class="signup-container">
+  <div class="signup-section">
+    <div *ngIf="errorMessage" class="errorMessage">{{errorMessage}}</div>
+    <div *ngIf="successMessage && phase !== 3" class="successMessage">{{successMessage}}</div>
+    <div *ngIf="successMessage && phase === 3" class="successMessage">{{successMessage}} | login <a routerLink = "/login">here</a></div>
+    <div class="signup-header">
+      {{phase === 1?'Create your account': 'Verify your email'}}
+    </div>
+    <div class="signup-body">
+      <div class="signup-form">
+        <form novalidate *ngIf ="phase === 1" [formGroup]="signupForm" (ngSubmit)="verifyEmail()">
+          <div class="name">
+            <div class="form-control">
+              <label>First name<span class="required"> *</span></label>
+              <input type="text" formControlName="fname" id = "fname" maxlength="20"/>
+              <div *ngIf= "isFieldValid('fname')" class="invalid-input">{{validationMessages.fname}}</div>
+            </div>
+            <div class="form-control">
+              <label>Last name<span class="required"> *</span></label>
+              <input type="text" formControlName="lname" maxlength="20"/>
+              <div *ngIf= "isFieldValid('lname')" class="invalid-input">{{validationMessages.lname}}</div>
+            </div>
+          </div>
+          <div class="form-control">
+            <label>Email<span class="required"> *</span></label>
+            <input type="text" formControlName="email" maxlength="50"/>
+            <div *ngIf= "isFieldValid('email')" class="invalid-input">{{validationMessages.email}}</div>
+          </div>
+          <div class="form-control">
+            <label>Password<span class="required"> *</span></label>
+            <input type="password" name="pass1" formControlName="pass1" minlength="6" maxlength="20"/>
+            <div class="togglePassword" (click)="togglePassword('pass1')">{{togglePasswordText1?'hide': 'show'}}</div>
+            <div *ngIf= "isFieldValid('pass1')" class="invalid-input">{{validationMessages.pass1}}</div>
+          </div>
+          <div class="form-control">
+            <label>Confirm Password<span class="required"> *</span></label>
+            <input type="password" name="pass2" formControlName="pass2" minlength="6" maxlength="20"/>
+            <div class="togglePassword" (click)="togglePassword('pass2')">{{togglePasswordText2?'hide': 'show'}}</div>
+            <div *ngIf= "isFieldValid('pass2')" class="invalid-input">{{validationMessages.pass2}}</div>
+          </div>
+          <div class="form-control">
+            <button [disabled] = "btnDisabled || !signupForm.valid || !checkAllFields()" type="submit" class="btn-full">Create</button>
+          </div>
+          <div class="already-member">
+            Already a member? <a routerLink="/login">login here</a>
+          </div>
+        </form>
+
+        <form novalidate *ngIf = "phase === 2 || phase === 3" [formGroup]="codeForm" (ngSubmit)="verifyCode()">
+            <div class="form-control">
+              <label>Enter the verfication code</label>
+              <input type="text" formControlName="code" id = "code" maxlength="6" pattern="^[0-9]{6}" />
+              <div *ngIf= "isFieldValid2('code')" class="invalid-input">{{validationMessages2.code}}</div>
+            </div>
+          <div class="form-control">
+            <button [disabled] = "btnDisabled || phase === 3" type="submit" class="btn-full">Proceed</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>

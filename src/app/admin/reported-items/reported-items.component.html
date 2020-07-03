@@ -1,0 +1,25 @@
+<table *ngIf = "reportedItems" table class="user-table">
+  <tr *ngIf = "errorMessage || successMessage">
+    <td *ngIf="errorMessage" class="errorMessage">{{errorMessage}}</td>
+    <td *ngIf="successMessage" class="successMessage">{{successMessage}}</td>  
+  </tr>
+  <tr>
+    <th>Item</th>
+    <th>Total Reports</th>
+    <th>Reported On</th>
+    <th>Actions</th>
+  </tr>
+  <tr *ngFor = "let item of reportedItems">
+    <td><a routerLink = "/donation/{{item._id}}">{{item.itemTitle[0]}}</a></td>
+    <td>{{item.count}}</td>
+    <td>{{item.reportedDate[0] | date:'medium'}}</td>
+    <td class="action-column"><span (click) = "delete(item)">Delete Item</span></td>
+  </tr>
+  <tr>
+    <tr *ngIf = "reportedItems.length == 0">
+      <td colspan="4">No items found</td>
+    </tr>
+    <tr>
+  
+  </tr>
+</table>

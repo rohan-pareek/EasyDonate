@@ -1,0 +1,41 @@
+<div *ngIf= "errorMessage; else mainPage" class="error">
+  <div class="errorMessage">{{errorMessage}}</div>
+</div>
+
+<ng-template #mainPage>
+  <div *ngIf="errorMessage" class="errorMessage">{{errorMessage}}</div>
+  <div *ngIf="successMessage" class="successMessage">{{successMessage}} | Visit <a routerLink = "/dashboard/requests">here</a> to view your request</div>
+  <div class="donation-wrapper" *ngIf = "donation">
+    <div class="donation-section">
+      <div class="donation-thumbnail">
+        <img [src] = "donation.thumbnail" />
+        <div class="donation-tools">
+          <button [disabled] = "sameUser || itemRequested" (click) = "requestItem(donation)">Request Item</button>
+          <button [disabled] = "disableReport" (click) = "report()">Report Item</button>
+        </div>
+      </div>
+      <div class="donation-details">
+        <span class="donation-title">{{donation.title}}</span>
+        <span class="donation-description">{{donation.description}}</span>
+        <span class="donation-address">
+          <div class="address-title">Pickup Address</div>
+          <div class="address-details">
+            <span>{{donation.address1}},</span>
+            <span>{{donation.address2}},</span>
+            <span>{{donation.city}},</span>
+            <span>{{donation.state}}, {{donation.zip}}</span>
+          </div>
+        </span>
+       <span class="donation-owner-email"><span class="item-by">Item By</span>{{donation.owner}} 
+       [<a href = "mailto:{{donation.ownerEmail}}">{{donation.ownerEmail}}</a>]</span>
+       <span class="item-created-on">Item added on <i>{{donation.createdOn | date}}</i></span>
+      </div>
+    </div>
+    <div class="additional-images">
+      <img *ngIf = "donation.img1" [src] = "donation.img1">
+      <img *ngIf = "donation.img2" [src] = "donation.img2">
+      <img *ngIf = "donation.img3" [src] = "donation.img3">
+      <img *ngIf = "donation.img4" [src] = "donation.img4">
+    </div>
+  </div>
+</ng-template>

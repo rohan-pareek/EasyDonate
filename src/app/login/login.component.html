@@ -1,0 +1,27 @@
+<section class="login-container">
+  <div class="login-section">
+    <div *ngIf = "errorMessage" class="errorMessage">{{errorMessage}}</div>
+    <div class="login-header">
+      Login to EasyDonate
+    </div>
+    <div class="login-body">
+      <div class="login-form">
+        <form novalidate [formGroup] = "loginForm" (ngSubmit) = "login()" >
+          <div class="form-control">
+            <label>Email</label>
+            <input type="text" formControlName = "email" id = "email">
+            <div *ngIf= "isFieldValid('email')" class="invalid-input">{{validationMessages.email}}</div>
+          </div>
+          <div class="form-control">
+            <label>Password</label>
+            <input type="password" formControlName = "pass">
+            <div *ngIf= "isFieldValid('pass')" class="invalid-input">{{validationMessages.pass}}</div>
+          </div>
+          <div class="form-control">
+            <button [disabled] = "btnDisabled || !loginForm.valid || !checkAllFields()" type="submit" class="btn-full">Login</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>

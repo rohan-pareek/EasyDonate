@@ -1,0 +1,113 @@
+<div class="donate-wrapper">
+  <div *ngIf="errorMessage" class="errorMessage">{{errorMessage}}</div>
+  <div *ngIf="successMessage" class="successMessage">{{successMessage}}</div>
+  <div class="donate-heading">
+    Add a new donation
+  </div>
+  <form novalidate [formGroup] = "donateForm" enctype="multipart/form-data">
+  <div class="donate-main">
+    <div class="donate-thumbnail">
+      <div class="form-control">
+        <label>Select Item thumbnail<span class="required"> *</span></label>
+        <img class="file-upload-background"
+        [src]="thumbnailURL" (click) = "thumbnail.click()">
+        <!-- <div class="resetThumbnail">x</div> -->
+        <input type="file" #thumbnail style="visibility:hidden;" (change) = "thumbnailChange($event)"
+        formControlName = "thumbnail" name="thumbnail" accept=".png, .jpg, .jpeg"/>
+        <div class="invalid-input" *ngIf = "isFieldValid('thumbnail')">{{validationMessages.thumbnail}}</div>
+      </div>
+    </div>
+    <div class="donate-form-section">
+      <div class="donate-form-heading">
+        <div>Item details</div>
+        <div class="required">[* marked fields are mandatory]</div>
+      </div>
+      <div class="donate-form">
+          <div class="form-control">
+            <label>Title<span class="required"> *</span></label>
+            <input type="text" formControlName="title" maxlength="100"/>
+            <div class="invalid-input" *ngIf = "isFieldValid('title')">{{validationMessages.title}}</div>
+          </div>
+          <div class="form-control">
+            <label>Description<span class="required"> *</span></label>
+            <textarea  formControlName="description" maxlength="500"></textarea>
+            <div class="invalid-input" *ngIf = "isFieldValid('description')">{{validationMessages.description}}</div>
+          </div>
+          <!-- <div class="accessibility">
+            <div class="form-control">
+              <label for = "public">Public</label>
+              <input type="radio" id="public" value = "public" name="access" formControlName="access"/>
+            </div>
+            <div class="form-control">
+              <label for = "private">Private</label>
+              <input type="radio" id="private" value="private" name="access"  formControlName="access"/>
+            </div>
+          </div> -->
+          <div class="form-control">
+            <label>Pickup Address Line 1<span class="required"> *</span></label>
+            <input type="text" formControlName="address1" maxlength="50"/>
+            <div class="invalid-input" *ngIf = "isFieldValid('address1')">{{validationMessages.address1}}</div>
+          </div>
+          <div class="form-control">
+            <label>Pickup Address Line 2<span class="required"> *</span></label>
+            <input type="text" formControlName="address2" maxlength="50"/>
+            <div class="invalid-input" *ngIf = "isFieldValid('address2')">{{validationMessages.address2}}</div>
+          </div>
+          <div class="address">
+            <div class="form-control">
+              <label>City<span class="required"> *</span></label>
+              <input type="text" formControlName="city" maxlength="30"/>
+              <div class="invalid-input" *ngIf = "isFieldValid('city')">{{validationMessages.city}}</div>
+            </div>
+            <div class="form-control">
+              <label>State<span class="required"> *</span></label>
+              <input type="text" formControlName="state" maxlength="30"/>
+              <div class="invalid-input" *ngIf = "isFieldValid('state')">{{validationMessages.state}}</div>
+            </div>                
+            <div class="form-control">
+              <label>Zip<span class="required"> *</span></label>
+              <input type="text" formControlName="zip" pattern="^[0-9]{6}$" maxlength="6"/>
+              <div class="invalid-input" *ngIf = "isFieldValid('zip')">{{validationMessages.zip}}</div>
+            </div>                
+          </div>
+      </div>
+    </div>
+  </div>
+  <div class="additional-thumbnails">
+    <div class="additional-thumbnail-heading">
+      Select additional item images (Optional, upto 4 images)
+    </div>
+    <div class="addition-thumbnail-form">
+      <div class="form-control">
+        <img class="file-upload-background"
+        [src]="img1URL" (click) = "img1.click()">
+        <input type="file" #img1 style="visibility:hidden;" (change) = "img1Change($event)"
+        formControlName = "img1" name="img1" accept=".png, .jpg, .jpeg"/> 
+      </div>
+      <div class="form-control">
+        <img class="file-upload-background"
+        [src]="img2URL" (click) = "img2.click()">
+        <input type="file" #img2 style="visibility:hidden;" (change) = "img2Change($event)"
+        formControlName = "img2" name="img2" accept=".png, .jpg, .jpeg"/> 
+      </div>
+      <div class="form-control">
+        <img class="file-upload-background"
+        [src]="img3URL" (click) = "img3.click()">
+        <input type="file" #img3 style="visibility:hidden;" (change) = "img3Change($event)"
+        formControlName = "img3" name="img3" accept=".png, .jpg, .jpeg"/> 
+      </div>
+      <div class="form-control">
+        <img class="file-upload-background"
+        [src]="img4URL" (click) = "img4.click()">
+        <input type="file" #img4 style="visibility:hidden;" (change) = "img4Change($event)"
+        formControlName = "img4" name="img4" accept=".png, .jpg, .jpeg"/> 
+      </div>
+    </div>
+  </div>
+</form>
+
+  <div class="form-save">
+    <button routerLink = "/dashboard">Return to dashboard</button>
+    <button (click) = "saveDonation()" [disabled] = "disableSave">Add Item</button>
+  </div>
+</div>
